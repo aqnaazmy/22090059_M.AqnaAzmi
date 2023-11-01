@@ -4,17 +4,11 @@
  */
 package pkg22090059_m.aqnaazmi;
 
-/**
- *
- * @author aqnaazmy
- */
 public class AqnaAzmi {
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String[] args) {
-        // TODO code application logic here
+
     }
     
 }
