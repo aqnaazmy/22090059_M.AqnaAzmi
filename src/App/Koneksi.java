@@ -1,34 +1,40 @@
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package App;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.SQLException;
 
-/**
- *
- * @author aqnaazmy
- */
 public class Koneksi {
-    public static Connection c;
-
-public static Connection getConnection(){
-    if (c==null) {
+    
+    public static Connection MySQl(){
+    
         try {
-            String url ="jdbc:mysql://localhost/banyan_tobacco";
-            String user="root";
-            String pass="";
-            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-            c = (Connection) DriverManager.getConnection(url,user,pass);
-        } catch (Exception e) {
-            Logger.getLogger(Koneksi.class.getName()).log(Level.SEVERE,null, e);
+            MysqlDataSource ds = new MysqlDataSource();
+            ds.setUser("root");        
+            ds.setPassword("");
+            ds.setServerName("localhost");
+            ds.setDatabaseName("banyan_tobacco");
+            ds.setPortNumber(3306);
+            Connection c = ds.getConnection();
+            System.out.println("database connected!");
+            return c;
+            
+        } catch (SQLException e) {
+            
+            System.err.println("database tidak ada " + e.getMessage());
+            return null;
+        }
+        
+    }
+    
+    public static void main(String[] args) {
+        
+        
+        try {
+            Connection conn = Koneksi.MySQl();
+            System.out.println(conn.getCatalog());
+        } catch (SQLException e) {
+            
         }
     }
-    return c;
-}
 }

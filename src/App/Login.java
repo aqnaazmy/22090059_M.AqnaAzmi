@@ -4,6 +4,18 @@
  */
 package App;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import java.awt.geom.RoundRectangle2D;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author aqnaazmy
@@ -14,7 +26,16 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     public Login() {
+        setUndecorated(true);
+//        setIcon();
         initComponents();
+        
+        setTitle("[LogIn] - UMKM Tegal Laka-laka");
+        // Rounded corners
+        setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 15, 15));
+        
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
     }
 
     /**
@@ -26,21 +47,162 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        RoundPanel = new RoundedPanel(25, new Color(0, 0, 0, 50));
+        welcomeJL = new javax.swing.JLabel();
+        usernameJL = new javax.swing.JLabel();
+        passwordJL = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        logInBtn = new App.ButtonGradient();
+        usernameTxt = new javax.swing.JTextField();
+        passwordTxt = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        RoundPanel.setBackground(new java.awt.Color(0, 0, 102));
+        RoundPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        RoundPanel.setPreferredSize(new java.awt.Dimension(360, 400));
+
+        welcomeJL.setFont(new java.awt.Font("Cantarell", 1, 20)); // NOI18N
+        welcomeJL.setForeground(new java.awt.Color(51, 102, 255));
+        welcomeJL.setText("Welcome Back");
+
+        usernameJL.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
+        usernameJL.setForeground(new java.awt.Color(239, 239, 239));
+        usernameJL.setText("Username");
+
+        passwordJL.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
+        passwordJL.setForeground(new java.awt.Color(239, 239, 239));
+        passwordJL.setText("Password");
+
+        jLabel5.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Login to continue");
+
+        logInBtn.setText("Continue");
+        logInBtn.setColor1(new java.awt.Color(51, 102, 255));
+        logInBtn.setColor2(new java.awt.Color(51, 51, 255));
+        logInBtn.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        logInBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logInBtnActionPerformed(evt);
+            }
+        });
+
+        usernameTxt.setBackground(new Color(0, 0, 0, 0));
+        usernameTxt.setFont(new java.awt.Font("Gadugi", 1, 14)); // NOI18N
+        usernameTxt.setForeground(new java.awt.Color(255, 255, 255));
+        usernameTxt.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 126, 250)));
+        usernameTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameTxtActionPerformed(evt);
+            }
+        });
+
+        passwordTxt.setBackground(new Color(0, 0, 0, 0));
+        passwordTxt.setFont(new java.awt.Font("Gadugi", 1, 13)); // NOI18N
+        passwordTxt.setForeground(new java.awt.Color(255, 255, 255));
+        passwordTxt.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 126, 250)));
+        passwordTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordTxtActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout RoundPanelLayout = new javax.swing.GroupLayout(RoundPanel);
+        RoundPanel.setLayout(RoundPanelLayout);
+        RoundPanelLayout.setHorizontalGroup(
+            RoundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RoundPanelLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(RoundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(logInBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                    .addComponent(usernameTxt)
+                    .addComponent(usernameJL)
+                    .addComponent(passwordJL)
+                    .addGroup(RoundPanelLayout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(RoundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(welcomeJL)
+                            .addGroup(RoundPanelLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel5))))
+                    .addComponent(passwordTxt))
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
+        RoundPanelLayout.setVerticalGroup(
+            RoundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RoundPanelLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(welcomeJL)
+                .addGap(5, 5, 5)
+                .addComponent(jLabel5)
+                .addGap(29, 29, 29)
+                .addComponent(usernameJL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(usernameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(passwordJL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(passwordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(logInBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(RoundPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Group 1.png"))); // NOI18N
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel1MousePressed(evt);
+            }
+        });
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 20, -1, 21));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Screen.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+        System.exit(0);
+    }//GEN-LAST:event_jLabel1MousePressed
+
+    private void passwordTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordTxtActionPerformed
+
+    private void usernameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTxtActionPerformed
+//        // TODO add your handling code here:
+//        if (usernameTxt.getText().isEmpty()) {
+//            usernameTxt.requestFocus();
+//        }else{
+//            loginProcess();
+//        }
+    }//GEN-LAST:event_usernameTxtActionPerformed
+
+    private void logInBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInBtnActionPerformed
+        // TODO add your handling code here:
+        loginProcess();
+    }//GEN-LAST:event_logInBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +240,58 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel RoundPanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private App.ButtonGradient logInBtn;
+    private javax.swing.JLabel passwordJL;
+    private javax.swing.JPasswordField passwordTxt;
+    private javax.swing.JLabel usernameJL;
+    private javax.swing.JTextField usernameTxt;
+    private javax.swing.JLabel welcomeJL;
     // End of variables declaration//GEN-END:variables
+    
+//    public void setIcon() {
+//        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/Icon-frame.png")));
+//    }
+
+    private void loginProcess() {
+        String user = usernameTxt.getText();
+        char[] pass = passwordTxt.getPassword();
+        
+        if (user.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username Harus Diisi");
+            usernameTxt.requestFocus();
+        } else if (pass.length == 0){
+            JOptionPane.showMessageDialog(this, "Password Harus Diisi");
+            passwordTxt.requestFocus();
+        }else{
+            String password = new String(pass);
+            logInBtn.setEnabled(true);
+            try {
+                Connection c = Koneksi.MySQl();
+                Statement st = c.createStatement();
+                String q = "SELECT * FROM user "
+                        +"WHERE user='"+user+"' "
+                        +"AND password=('"+password+"')";
+                System.out.println(q);
+                ResultSet rs = st.executeQuery(q);
+                if (rs.next()) {
+                    Main h = new Main();
+//                    h.setExtendedState(Frame.MAXIMIZED_BOTH);
+                    this.setVisible(false);
+                    h.setVisible(true);
+                }else{
+                    JOptionPane.showMessageDialog(this, "Username dan Password Salah");
+                    usernameTxt.requestFocus();
+                }
+                logInBtn.setEnabled(true);
+                } catch (HeadlessException | SQLException e) {
+                    JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+        }}
+
 }
+
